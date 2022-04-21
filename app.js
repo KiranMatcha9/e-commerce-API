@@ -31,7 +31,7 @@ const orderRouter = require('./routes/orderRoutes')
 
 //Middleware
 const notFoundMiddleware = require('./middleware/not-found')
-cons
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 app.set('trust proxy', 1)
 app.use(rateLimiter({
@@ -44,21 +44,21 @@ app.use(xss())
 app.use(mongoSanitize())
 
 
-app.use(morgan('tiny'))
+// app.use(morgan('tiny'))
 app.use(express.json())
 app.use(cookieParser(process.env.JWT_SECRET))
 app.use(express.static('./public'))
 app.use(fileupload())
 
 
-app.get('/',(req,res) =>{
-    res.send('e-commerce')
-})
+// app.get('/',(req,res) =>{
+//     res.send('e-commerce')
+// })
 
-app.get('/api/v1',(req,res) =>{
-    console.log(req.signedCookies)
-    res.send('e-commerce')
-})
+// app.get('/api/v1',(req,res) =>{
+//     console.log(req.signedCookies)
+//     res.send('e-commerce')
+// })
 
 
 app.use('/api/v1/auth',authRouter)
